@@ -1,0 +1,47 @@
+{
+  "posts": [
+    {
+      "title": "1234q",
+      "body": "wer",
+      "id": 1
+    },
+    {
+      "title": "ewrwr",
+      "body": "qwerrw",
+      "id": 2
+    },
+    {
+      "title": "qerwr",
+      "body": "qerr",
+      "id": 3
+    },
+    {
+      "title": "adfa",
+      "body": "asdsf",
+      "id": 4
+    },
+    {
+      "title": "asdf",
+      "body": "zdgdaa",
+      "id": 5
+    },
+    {
+      "title": "qwerqw",
+      "body": "asdfsaf",
+      "id": 6
+    }
+  ],
+  "comments": [],
+  "users": [
+    {
+      "name": "admin",
+      "email": "email@example.com",
+      "password": "admin"
+    },
+    {
+      "name": "samandy",
+      "email": "stadnyk.andy@gmail.com",
+      "password": "samandy90"
+    }
+  ]
+}
