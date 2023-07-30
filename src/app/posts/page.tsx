@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Button, Select, Container } from "@/common";
-import { PostForm } from "@/components/PostForm";
+import { PostForm } from "@/components/PostForm/PostForm";
 import { PostsList } from "@/components/PostsList";
 import { PostFilter } from "@/components/PostFilter";
 import { Pagination } from "@/components/Pagination";

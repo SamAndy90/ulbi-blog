@@ -4,7 +4,7 @@ import { SortType } from "@/app/posts/page";
 
 export type UseSortedPostsProps = {
     sort: SortType;
-    posts: PostData[];
+    posts: PostData[] | [];
 };
 
 export type UsePostsProps = {

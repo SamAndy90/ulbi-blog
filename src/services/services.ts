@@ -1,12 +1,14 @@
 import axios from "axios";
 
+axios.defaults.baseURL = "http://localhost:4444";
+
 export type PostData = {
     id?: number;
     title: string;
     body: string;
+    comments?: CommentData[] | [];
 };
 
-axios.defaults.baseURL = "http://localhost:4444";
 export async function getPostsCount() {
     return await axios.get<PostData[]>("/posts").then((data) => data.data.length);
 }
@@ -23,7 +25,7 @@ export async function getAllPosts(limit: number, page: number) {
 }
 
 export async function getPost(id: string | "") {
-    return await axios.get<PostData>(`/posts/${id}`).then((data) => data.data);
+    return await axios.get<PostData>(`/posts/${id}?_embed=comments`).then((data) => data.data);
 }
 
 export async function addPost(post: PostData) {
@@ -31,19 +33,22 @@ export async function addPost(post: PostData) {
 }
 
 export async function delPost(id: number) {
-    return await axios.delete(`/posts/${id}`);
+    return await axios.delete<PostData>(`/posts/${id}`);
 }
 
-export type CommentsData = {
-    id: number;
-    name: string;
+export type CommentData = {
+    id?: number;
     email: string;
-    body: string;
+    text: string;
     postId: number;
 };
 
-export async function getPostComments(id: string | "") {
-    return await axios.get<CommentsData[]>(`/comments?postId=${id}`).then((data) => data.data);
+export async function addComment(comment: CommentData) {
+    return await axios.post<CommentData>(`/comments`, comment);
+}
+
+export async function delComment(id: number) {
+    return await axios.delete<CommentData>(`/comments/${id}`);
 }
 
 export type User = {

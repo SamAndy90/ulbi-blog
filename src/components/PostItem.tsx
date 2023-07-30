@@ -20,7 +20,7 @@ export function PostItem({ post, remove }: PostItemProps) {
             </div>
             <div className="flex gap-2 items-center justify-end flex-wrap">
                 <Link href={`posts/${id}`} className={"px-4 py-1 rounded bg-green-400 w-20"}>Open</Link>
-                <Button onClick={() => remove(id)}>Delete</Button>
+                <Button onClick={() => id && remove(id)} additionalClasses="bg-red-700 text-white">Delete</Button>
             </div>
         </div>
     );

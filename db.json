@@ -1,37 +1,46 @@
 {
   "posts": [
     {
-      "title": "1234q",
-      "body": "wer",
+      "title": "1234",
+      "body": "1234",
       "id": 1
     },
     {
-      "title": "ewrwr",
-      "body": "qwerrw",
-      "id": 2
-    },
-    {
-      "title": "qerwr",
-      "body": "qerr",
+      "title": "3456",
+      "body": "3456",
       "id": 3
     },
     {
-      "title": "adfa",
-      "body": "asdsf",
+      "title": "4567",
+      "body": "4567",
       "id": 4
     },
     {
-      "title": "asdf",
-      "body": "zdgdaa",
+      "title": "5678",
+      "body": "5678",
       "id": 5
-    },
-    {
-      "title": "qwerqw",
-      "body": "asdfsaf",
-      "id": 6
     }
   ],
-  "comments": [],
+  "comments": [
+    {
+      "postId": 1,
+      "email": "stadnyk.andy@gmail.com",
+      "text": "1234 1234 1234 1234",
+      "id": 3
+    },
+    {
+      "postId": 1,
+      "email": "stadnyk.andy@gmail.com",
+      "text": "ffeefefefefef",
+      "id": 6
+    },
+    {
+      "postId": 1,
+      "email": "stadnyk.andy@gmail.com",
+      "text": "adfadasfdqweqew",
+      "id": 8
+    }
+  ],
   "users": [
     {
       "name": "admin",
