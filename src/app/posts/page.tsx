@@ -13,6 +13,7 @@ import { usePagination } from "@/hooks/usePagination";
 import { getTotalPages } from "@/helpers/getTotalPages";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Metadata } from "next";
+import { getAxiosDRFErrorMessage } from "@/helpers/axios";
 
 // export const metadata: Metadata = {
 //     title: "Posts",
@@ -29,12 +30,8 @@ export default function Posts() {
     const [modal, setModal] = useState(false);
     const [filter, setFilter] = useState<Filter>({ sort: "", query: "" });
     const [limit, setLimit] = useState(10);
-    const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
-
-    useEffect(() => {
-        getTotalPages(limit).then((pagesCount) => setTotalPages(pagesCount));
-    }, [limit, totalPages, page]);
+    const [totalPages, setTotalPages] = useState(1);
 
     const { data, isSuccess, isLoading, isError, error } = useQuery({
         queryKey: ["posts", limit, page],
@@ -47,6 +44,10 @@ export default function Posts() {
         posts: data || [],
     });
 
+    useEffect(() => {
+        getTotalPages(limit).then((pagesCount) => setTotalPages(pagesCount));
+    }, [limit, data]);
+
     const removePost = useMutation({
         mutationFn: delPost,
         onSuccess: () => {
@@ -55,12 +56,11 @@ export default function Posts() {
         },
     });
 
-    const deletePost = (id: number) => removePost.mutate(id);
+    const onPostDelete = (id: number) => removePost.mutate(id);
 
-    const arrOfPages = usePagination(totalPages).length - 1;
-
+    const lastPage = usePagination(totalPages).length - 1;
     useEffect(() => {
-        data?.length === 0 && setPage(arrOfPages);
+        data?.length === 0 && setPage(lastPage);
     }, [data]);
 
     const changePage = (p: number) => {
@@ -88,7 +88,7 @@ export default function Posts() {
                     />
                     {isError && (
                         <h1 className="text-red-600 text-center text-4xl">
-                            {error instanceof Error && error.message}
+                            {getAxiosDRFErrorMessage(error)}
                         </h1>
                     )}
                     {isLoading && <Loader />}
@@ -96,7 +96,7 @@ export default function Posts() {
                         <>
                             <PostsList
                                 posts={sortedAndSearchedPosts || []}
-                                deletePost={deletePost}
+                                deletePost={onPostDelete}
                             />
                             <Pagination
                                 totalPages={totalPages}

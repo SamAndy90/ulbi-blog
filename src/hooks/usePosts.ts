@@ -14,24 +14,20 @@ export type UsePostsProps = {
 };
 
 export const useSortedPosts = ({ sort, posts = [] }: UseSortedPostsProps): PostData[] => {
-    return useMemo(() => {
-        if (sort) {
-            return [...posts].sort((a, b) => a[sort].localeCompare(b[sort]));
-        }
-        return posts;
-    }, [sort, posts]);
+    if (sort) {
+        return [...posts].sort((a, b) => a[sort].localeCompare(b[sort]));
+    }
+    return posts;
 };
 
 export const usePosts = ({ sort, query, posts = [] }: UsePostsProps) => {
     const sortedPosts = useSortedPosts({ sort, posts });
-    return useMemo(() => {
-        return sortedPosts.filter((post) => {
-            return (
-                (post.title.toLowerCase().includes(query.toLowerCase()) &&
-                    post.body.toLowerCase().includes(query.toLowerCase())) ||
-                post.title.toLowerCase().includes(query.toLowerCase()) ||
-                post.body.toLowerCase().includes(query.toLowerCase())
-            );
-        });
-    }, [query, sortedPosts]);
+    return sortedPosts.filter((post) => {
+        return (
+            (post.title.toLowerCase().includes(query.toLowerCase()) &&
+                post.body.toLowerCase().includes(query.toLowerCase())) ||
+            post.title.toLowerCase().includes(query.toLowerCase()) ||
+            post.body.toLowerCase().includes(query.toLowerCase())
+        );
+    });
 };

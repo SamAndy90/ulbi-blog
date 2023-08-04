@@ -2,9 +2,9 @@ import { Container } from "@/common";
 import { Metadata } from "next";
 import { PostDetails } from "@/components/PostDetails";
 
-// export const metadata: Metadata = {
-//     title: "Post",
-// };
+export const metadata: Metadata = {
+    title: "Post",
+};
 
 export type PostProps = {
     params: { postSlug: string };

@@ -1,8 +1,5 @@
 import { AxiosError, CanceledError } from "axios";
 
-import { isObj } from "./js-types";
-import { shakeCaseToWords, toTitleCase } from "./string";
-
 const StatusCodeMessage: {
     [key: number | string]: string;
 } = {
@@ -25,26 +22,6 @@ export function getAxiosDRFErrorMessage(error: unknown) {
     }
 
     if (!error.response) return error.message;
-
-    const data = error.response?.data;
-    if (isObj(data)) {
-        const messages: string[] = [];
-        for (const [fieldName, fieldErrors] of Object.entries(data)) {
-            let errorMessage = Array.isArray(fieldErrors) ? fieldErrors.join(", ") : "";
-
-            if (!errorMessage) continue;
-            if (!errorMessage.endsWith(".")) errorMessage += ".";
-
-            if (fieldName === "non_field_errors") {
-                messages.push(errorMessage);
-                continue;
-            }
-
-            messages.push(`${toTitleCase(shakeCaseToWords(fieldName))}: ${errorMessage}`);
-        }
-
-        if (messages.length) return messages.join(" ");
-    }
 
     const statusCodeMessage = StatusCodeMessage[error.response.status];
     if (statusCodeMessage) return statusCodeMessage;
