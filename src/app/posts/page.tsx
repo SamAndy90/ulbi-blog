@@ -61,7 +61,7 @@ export default function Posts() {
     const lastPage = usePagination(totalPages).length - 1;
     useEffect(() => {
         data?.length === 0 && setPage(lastPage);
-    }, [data]);
+    }, [data, lastPage]);
 
     const changePage = (p: number) => {
         setPage(p);
@@ -110,26 +110,3 @@ export default function Posts() {
         </section>
     );
 }
-
-// const lastElement = useRef();
-// const observer = useRef();
-// const {data, isError, isLoading} = useQuery({
-//     queryKey: ["myposts"],
-//     queryFn: () => { axios.get<PostData[]>("https://jsonplaceholder.typicode.com/posts", {
-//         params: {
-//             _limit: limit,
-//             _page: page,
-//         }
-//     })}
-// })
-
-// useEffect(() => {
-//     if(isLoading) return
-//     if(observer.current) observer.current.disconnect()
-//     observer.current = new IntersectionObserver((entries) => {
-//         if(entries[0].isIntersecting && page < 10) {
-//             setPage(page + 1);
-//         }
-//     });
-//     observer.current.observe(lastElement.current);
-// }, [isLoading]);
